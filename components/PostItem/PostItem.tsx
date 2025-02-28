@@ -1,14 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
 import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated-carousel";
 import { Media, PostItemProps } from "@/redux/type";
+import { useDispatch } from "react-redux";
+import { setPostID } from "@/redux/slices/postID";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import styles from "./PostItem.styles";
-import { useDispatch } from "react-redux";
-import { setPostID } from "@/redux/slices/postID";
 
 const { width: screenWidth } = Dimensions.get("window");
 

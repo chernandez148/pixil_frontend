@@ -4,6 +4,7 @@ import { usePaginatedCommentsByPostID } from '@/hooks/usePaginatedCommentsByPost
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import styles from './CommentsList.styles';
+import CommentItem from '../CommentItem/CommentItem';
 
 function CommentsList() {
     const postID = useSelector((state: RootState) => state.postID.postID);
@@ -13,24 +14,15 @@ function CommentsList() {
     // Flatten the pages into a single array of comments
     const comments = data?.pages.flatMap((page) => page.comments) || [];
 
+    console.log(comments)
+
     // Render a single comment
     const renderComment = ({ item }: { item: any }) => (
-        <View style={styles.Comment}>
-
-            {item.user.profile_image ? (
-                <Image style={styles.AuthorImage} source={{ uri: item.user.profile_image }} />
-            ) : (
-                <Image style={styles.AuthorImage} source={require('@/assets/images/profile-image-placeholder.png')} />
-            )}
-            <View style={styles.CommentContent}>
-                <Text style={styles.CommentAuthor}>{item.user.first_name} {item.user.last_name}</Text>
-                <Text style={styles.CommentText}>{item.content}</Text>
-                <TouchableOpacity>
-                    <Text style={styles.ReplyText}>Reply</Text>
-                </TouchableOpacity>
-            </View>
-
-        </View>
+        <CommentItem
+            id={item.ID}
+            author={item.user}
+            comment={item.content}
+        />
     );
 
     // Render loading indicator
