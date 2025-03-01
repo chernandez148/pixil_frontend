@@ -22,6 +22,7 @@ function CommentsList() {
             id={item.ID}
             author={item.user}
             comment={item.content}
+            replies={item.replies}
         />
     );
 

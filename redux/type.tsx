@@ -30,6 +30,7 @@ export interface CommentItemProps {
     id: number;
     author: User;
     comment: string;
+    replies: ReplyItemProps[]
 }
 
 export interface RepliesListProps {

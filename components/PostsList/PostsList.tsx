@@ -1,5 +1,5 @@
 import { usePaginatedPosts } from "@/hooks/usePaginatedPosts";
-import { View, FlatList, ActivityIndicator, Text } from "react-native";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import PostItem from "../PostItem/PostItem";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -19,8 +19,10 @@ export default function PostsList() {
     const filteredPosts = data?.pages
         .flatMap((page) => page.posts) // Flatten the array of pages into a single array of posts
         .filter((post) =>
-            user?.following?.some((following: { ID: number }) => following.ID === post.userID) || post.userID === user?.ID
+            user?.following?.some((following: { ID: number }) => following.ID === post.user_id) || post.user_id === user?.ID
         );
+
+    console.log("Posts: ", filteredPosts)
 
     // Open the BottomSheetModal when postID changes
     const handlePostComments = useCallback(() => {

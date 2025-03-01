@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
         fontSize: 12,
         marginTop: 5
     },
+    ViewReplies: {},
+    ViewRepliesText: {
+        fontSize: 12,
+        textAlign: "center"
+    }
 });
 
 export default styles

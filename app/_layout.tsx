@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import { store, useAppDispatch } from "@/redux/store"; // Import useAppDispatch
+import { store, useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { Stack, router } from "expo-router";
@@ -25,13 +25,15 @@ export default function RootLayout() {
 
 // Handles authentication-based routing
 function LayoutContent() {
-  const dispatch = useAppDispatch(); // Use the custom hook
+  const dispatch = useAppDispatch();
   const { user } = useSelector((state: RootState) => state.user);
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
+  console.log("User: ", user)
+
   useEffect(() => {
     if (user === undefined) {
-      dispatch(initializeUser()); // No more TypeScript error
+      dispatch(initializeUser());
     }
   }, [dispatch, user]);
 
@@ -41,9 +43,9 @@ function LayoutContent() {
     if (user === null) {
       router.replace("/auth");
     } else {
-      router.replace("/(tabs)");
+      router.replace("/(tabs)/home");
     }
-  }, [user]);
+  }, [user, fontsLoaded]);
 
   useEffect(() => {
     async function loadFonts() {

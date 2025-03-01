@@ -4,10 +4,6 @@ const fetchPaginatedReplies = async ({ pageParam = 1, commentID }: { pageParam?:
 
     const response = await fetch(`https://pixil-server-production.up.railway.app/comments/${commentID}/replies?page=${pageParam}`);
 
-    if (response.status === 404) {
-        return { replies: [], nextPage: undefined }; // Return an empty array for no replies
-    }
-
     if (!response.ok) throw new Error("Failed to fetch replies");
     return response.json();
 };

@@ -19,10 +19,11 @@ const initialState: UserState = {
 export const initializeUser = createAsyncThunk('user/initialize', async (_, { rejectWithValue }) => {
     try {
         const storedUser = await AsyncStorage.getItem('user');
+
         if (storedUser) {
-            return JSON.parse(storedUser);
+            return { user: JSON.parse(storedUser) };
         }
-        return null;
+        return { user: null };
     } catch (error) {
         return rejectWithValue("Failed to load user");
     }
@@ -42,9 +43,8 @@ export const loginUser = createAsyncThunk(
 
             if (!response.ok) throw new Error(data.message || 'Login failed');
 
-            await AsyncStorage.setItem('user', JSON.stringify(data.user)); // Save user to AsyncStorage
-
-            return data; // Return full user data
+            await AsyncStorage.setItem('user', JSON.stringify(data.user)); // Save the entire user object
+            return { user: data.user }; // Return the entire user object
         } catch (error) {
             if (error instanceof Error) {
                 return rejectWithValue(error.message);
@@ -63,7 +63,7 @@ const userSlice = createSlice({
             state.user = null;
             state.isAuthenticated = false;
             state.error = null;
-            AsyncStorage.removeItem('user'); // Remove from AsyncStorage
+            AsyncStorage.removeItem('user'); // Remove user from AsyncStorage
         },
     },
     extraReducers: (builder) => {
@@ -74,7 +74,7 @@ const userSlice = createSlice({
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.loading = false;
-                state.user = action.payload;
+                state.user = action.payload.user;
                 state.isAuthenticated = true;
             })
             .addCase(loginUser.rejected, (state, action) => {
@@ -82,8 +82,8 @@ const userSlice = createSlice({
                 state.error = action.payload as string;
             })
             .addCase(initializeUser.fulfilled, (state, action) => {
-                state.user = action.payload;
-                state.isAuthenticated = !!action.payload;
+                state.user = action.payload.user;
+                state.isAuthenticated = !!action.payload.user;
             })
             .addCase(initializeUser.rejected, (state, action) => {
                 state.error = action.payload as string;
