@@ -73,6 +73,7 @@ function LayoutContent() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="auth" options={{ headerShown: false }} />
+        <Stack.Screen name="editProfile" options={{ headerShown: false }} />
       </Stack>
     </GestureHandlerRootView>
   );

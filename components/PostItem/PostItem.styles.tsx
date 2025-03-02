@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     PostImage: {
         width: "100%",
         height: 300,
-        borderRadius: 15
     },
     AuthorImage: {
         width: 35,
@@ -45,10 +44,10 @@ const styles = StyleSheet.create({
     },
     PaginationContainer: {
         gap: 5,
-        marginTop: -15,
+        top: -15,
     },
     PostActions: {
-        marginTop: 25,
+        marginTop: 10,
         marginBottom: 10,
         marginHorizontal: 5,
         flexDirection: "row",
