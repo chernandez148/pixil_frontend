@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     CommentContent: {
-        width: "100%",
         flexDirection: "row",
         backgroundColor: "#F5F5F5",
         justifyContent: "space-between",

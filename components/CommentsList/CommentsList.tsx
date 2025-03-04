@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import styles from './CommentsList.styles';
 import CommentItem from '../CommentItem/CommentItem';
+import CommentForm from '../CommentForm/CommentForm';
 
 function CommentsList() {
     const postID = useSelector((state: RootState) => state.postID.postID);
@@ -58,6 +59,7 @@ function CommentsList() {
                 onEndReachedThreshold={0.5} // Load more when 50% of the list is scrolled
                 ListFooterComponent={renderFooter}
             />
+            <CommentForm />
         </View>
     );
 }
